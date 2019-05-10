@@ -7,14 +7,24 @@
     "name": "Ernesto Bonet",
     "email": "ebonet@eabonet.com"
   },
-  "repository": "https://github.com/bernestoalberto/Sheets-Api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bernestoalberto/Sheets-Api.git"
+  },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "deploy": "gcloud app deploy",
+    "create-app-engine": "gcloud app create --project=acs-sheets-00001",
+    "browse": "gcloud app browse",
+    "system-test": "repo-tools test app",
+    "test": "npm run system-test",
+    "e2e-test": "repo-tools test deploy"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
+    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "google-auth-library": "^0.9.10",
     "googleapis": "^7.1.0",
     "morgan": "^1.7.0",
@@ -23,5 +33,14 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
+  },
+  "cloud-repo-tools": {
+    "test": {
+      "app": {
+        "msg": "Sheets working!"
+      }
+    },
+    "requiresKeyFile": true,
+    "requiresProjectId": true
   }
 }
