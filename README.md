@@ -1,5 +1,7 @@
 `` Sheets``
 # Use Node JS 9
 # Instructions
-``nvm install 9``
-``npm install --engine-strict``
+``curl -o- ``
+``nvm install 9.``
+``npm install --engine-strict.``
+
