@@ -207,6 +207,9 @@ function getClientId(order) {
         else if(order['client'] ==  'AMERICAN CLINICAL TEST'){
             resolve(0);
         }
+        else if(order['client'] ==  'TRULIEVE - PRODUCT'){
+            resolve(1239);
+        }
         else if(order['client'] ==  'AeroSource-H'){
             resolve(1280);
         }
@@ -251,6 +254,12 @@ async function getPanels(object) {
     if(object['rsfull'] == 'X'){
         panels.push('Residual Solvents');
     }
+    if(object['ethanol'] == 'X'){
+        createEthanolResultEntry(object['order']);
+    }
+    if(object['terpnes'] == 'X'){
+        panels.push('Terpenes');
+    }
     if(object['ter2'] == 'X'){
         panels.push('Terpenes 2');
     }
@@ -262,6 +271,9 @@ async function getPanels(object) {
     }
     if(object['moisture'] == 'X'){
         panels.push('Moisture');
+    }
+    if(object['orderstatus'] == 'Expedited'){
+        panels.push('Expedited Fee');
     }
     if(object['miqpcr'] == 'X'){
         panels.push('Microbiology (qPCR)');
@@ -361,6 +373,15 @@ function createResultEntry(orderid,panelid,specimentype){
     FROM testcompoundrel c LEFT JOIN tests t ON t.idtests = c.compoundid
     WHERE t.testpanelid = '${panelid}' AND t.specimentypeid = '${specimentype}'
     AND active= 'yes' GROUP BY c.compoundid ORDER BY compoundid`;
+    return new Promise(resolve =>{
+        mysql2.exec(query,null,function (response) {
+            resolve(response);
+        });
+    });
+}
+function createEthanolResultEntry(orderid){
+
+    let query = `INSERT INTO results('orderid', 'testid', 'testname', 'unit') VALUES(${orderid},3558,'Ethanol',14)`;
     return new Promise(resolve =>{
         mysql2.exec(query,null,function (response) {
             resolve(response);
