@@ -50,7 +50,8 @@ app.all('/*', function (req, res, next) {
     'use strict';
     if(req.originalUrl = '/tokensiginonserver'){
 
-    }else{
+    }
+    else{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-type, Accept, x-token, X-Key");

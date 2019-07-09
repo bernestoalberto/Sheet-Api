@@ -28,34 +28,47 @@
       {{/if}}
       <div class="mdl-card__supporting-text">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" name="customerName" value="{{order.customerName}}">
-          <label class="mdl-textfield__label" for="sample1">Customer name...</label>
+          <input class="mdl-textfield__input" type="datetime-local" name="receiveDate" value="{{order.ReceiveDate}}">
+          <label class="mdl-textfield__label" for="sample1">Receive Date...</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" name="productCode" id="productCode" value="{{order.productCode}}">
-          <label class="mdl-textfield__label" for="sample1">Product code...</label>
+          <input class="mdl-textfield__input" type="text" name="productCode" id="sampleType" value="{{order.SampleType}}">
+          <label class="mdl-textfield__label" for="sample1">Sample Type...</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" pattern="[0-9]*" name="unitsOrdered" value="{{order.unitsOrdered}}">
-          <label class="mdl-textfield__label" for="sample1">Units ordered...</label>
-          <span class="mdl-textfield__error">Must be a positive integer</span>
+          <input class="mdl-textfield__input" type="text"  name="batch" value="{{order.Batch}}">
+          <label class="mdl-textfield__label" for="sample1">Batch...</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" pattern="[0-9]*(\.[0-9]+)?" name="unitPrice" value="{{order.unitPrice}}">
-          <label class="mdl-textfield__label" for="sample1">Units price (USD)...</label>
-          <span class="mdl-textfield__error">Must be a positive number</span>
+          <input class="mdl-textfield__input" type="text"  name="accession" value="{{order.Accession}}">
+          <label class="mdl-textfield__label" for="sample1">Accession...</label>
         </div>
 
-        {{#if order}}
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
-          <input class="mdl-textfield__input" type="text" pattern="PENDING|SHIPPED|DELIVERED" name="status" value="{{order.status}}">
-          <label class="mdl-textfield__label" for="sample1">Status...</label>
-          <span class="mdl-textfield__error">Must be one of PENDING, SHIPPED, or DELIVERED</span>
+          <input class="mdl-textfield__input" type="number" step="0.1"  min="0" name="weight" value="{{order.Weight}}">
+          <label class="mdl-textfield__label" for="sample1">Weight ...</label>
         </div>
-        {{/if}}
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+              <input class="mdl-textfield__input" type="datetime-local" name="dateTested" value="{{order.DateTested}}">
+              <label class="mdl-textfield__label" for="sample1">Date Tested ...</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+              <input class="mdl-textfield__input" type="datetime-local" name="dateResulted" value="{{order.DateResulted}}">
+              <label class="mdl-textfield__label" for="sample1">Date Resulted ...</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+              <input class="mdl-textfield__input" type="number" min="0" step="0.1" name="concentration" value="{{order.Concentration}}">
+              <label class="mdl-textfield__label" for="sample1">Concentration ...</label>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label block">
+              <input class="mdl-textfield__input" type=text" name="repeat" value="{{order.Repeat}}">
+              <label class="mdl-textfield__label" for="sample1">Repeat...</label>
+          </div>
       </div>
       <div class="mdl-card__actions">
         <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised">

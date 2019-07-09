@@ -1,5 +1,9 @@
 node_modules
 db.sqlite
 config.json
-.idea 
-node_modules  
+.idea
+.config
+node_modules
+token.json
+client_secret.json
+credentials.json

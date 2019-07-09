@@ -21,11 +21,17 @@
 
 module.exports = function(sequelize, DataTypes) {
     let Order = sequelize.define('Order', {
-        customerName: {type: DataTypes.STRING, allowNull: false},
-        productCode: {type: DataTypes.STRING, allowNull: false},
-        unitsOrdered: {type: DataTypes.INTEGER, allowNull: false},
-        unitPrice: {type: DataTypes.FLOAT, allowNull: false},
-        status: {type: DataTypes.STRING, allowNull: false, defaultValue: 'PENDING'}
+        id: {type: DataTypes.INTEGER, allowNull: false},
+        ReceiveDate: {type: DataTypes.DATE, allowNull: false},
+        SampleType: {type: DataTypes.STRING, allowNull: false},
+        Batch: {type: DataTypes.STRING, allowNull: false},
+        Accession: {type: DataTypes.STRING, allowNull: false, primaryKey : true },
+        Weight: {type: DataTypes.FLOAT, allowNull: true, defaultValue: 'mg'},
+        DateTested: {type: DataTypes.DATE, allowNull: true },
+        DateResulted: {type: DataTypes.DATE, allowNull: true},
+        Repeat: {type: DataTypes.STRING, allowNull: true },
+        Concentration: {type: DataTypes.FLOAT, allowNull: true}
+
     });
 
     return Order;

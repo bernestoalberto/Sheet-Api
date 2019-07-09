@@ -16,6 +16,22 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
+<div class="progress" >
+    <div class="indeterminate"></div>
+</div>
+<div class="mdl-layout-spacer"></div>
+<button class="mdc-fab mdc-fab--extended" id="import"  type="button" rel="import">
+    <i class="material-icons">
+        cloud_download
+    </i>
+
+    <span class="mdc-fab__label">
+
+
+                                                                                                                                              Import orders</span>
+</button>
+
+<div id="spinner" class="mdl-spinner mdl-js-spinner"></div>
 
 <div class="mdl-grid">
   <section id="orders" class="mdl-cell mdl-cell--8-col relative">
@@ -27,13 +43,18 @@
         </div>
         <div class="mdl-card__supporting-text">
           <table class="order-details">
-            <tr><th>Customer</th><td>{{customerName}}</td></tr>
-            <tr><th>Product code</th><td>{{productCode}}</td></tr>
-            <tr><th>Units ordered</th><td>{{unitsOrdered}}</td></tr>
-            <tr><th>Unit price (USD)</th><td>{{unitPrice}}</td></tr>
-            <tr><th>Status</th><td>{{status}}</td></tr>
+            <tr><th>Receive Date</th><td>{{ReceiveDate}}</td></tr>
+            <tr><th>Sample Type</th><td>{{SampleType}}</td></tr>
+            <tr><th>Batch</th><td>{{Batch}}</td></tr>
+            <tr><th>Accession #</th><td>{{Accession}}</td></tr>
+            <tr><th>Weight</th><td>{{Weight}}</td></tr>
+            <tr><th>Date Tested</th><td>{{DateTested}}</td></tr>
+            <tr><th>DateResulted</th><td>{{DateResulted}}</td></tr>
+            <tr><th>Concentration</th><td>{{Concentration}}</td></tr>
+            <tr><th>Repeat</th><td>{{Repeat}}</td></tr>
           </table>
         </div>
+
         <div class="mdl-card__actions">
           <a class="mdl-button mdl-button--colored mdl-js-button
                     mdl-js-ripple-effect"
@@ -58,7 +79,7 @@
         <div class="mdl-list">
             <div class="mdl-list__item">
       <span class="mdl-list__item-primary-content mdl-layout-title">
-        Spreadsheets</span>
+      Create  Spreadsheets</span>
                 <span class="mdl-list__item-secondary-action">
         <button class="mdl-button mdl-js-button mdl-button--raised
                        mdl-js-ripple-effect mdl-button--colored"
@@ -80,6 +101,10 @@
             {{/each}}
         </div>
     </section>
+    <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
 
 </div>
-<script src="https://payments.developers.google.com/js/apis/pay.js"></script>
+

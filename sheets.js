@@ -54,7 +54,7 @@ SheetsHelper.prototype.createSpreadsheet = function(title, callback) {
                     properties: {
                         title: 'Data',
                         gridProperties: {
-                            columnCount: 6,
+                            columnCount: 9,
                             frozenRowCount: 1
                         }
                     }
@@ -103,13 +103,18 @@ SheetsHelper.prototype.createSpreadsheet = function(title, callback) {
     });
 };
 
+
+
 let COLUMNS = [
-    { field: 'id', header: 'ID' },
-    { field: 'customerName', header: 'Customer Name'},
-    { field: 'productCode', header: 'Product Code' },
-    { field: 'unitsOrdered', header: 'Units Ordered' },
-    { field: 'unitPrice', header: 'Unit Price' },
-    { field: 'status', header: 'Status'}
+    { field: 'ReceiveDate', header: 'ReceiveDate'},
+    { field: 'SampleType', header: 'SampleType' },
+    { field: 'Batch', header: 'Batch' },
+    { field: 'Accession', header: 'Accession' },
+    { field: 'Weight', header: 'Weight'},
+    { field: 'DateTested', header: 'DateTested'},
+    { field: 'DateResulted', header: 'Resulted'},
+    { field: 'Repeat', header: 'Repeat'},
+    { field: 'Concentration', header: 'Concentration'}
 ];
 
 /**
@@ -201,6 +206,7 @@ SheetsHelper.prototype.sync = function(spreadsheetId, sheetId, orders, callback)
  * @param  {Array} orders The orders.
  * @return {Array}        The RowData.
  */
+// Fix this
 function buildRowsForOrders(orders) {
     return orders.map(function(order) {
         let cells = COLUMNS.map(function(column) {
@@ -287,7 +293,7 @@ function buildPivotTableRequest(sourceSheetId, targetSheetId) {
                                 },
                                 rows: [
                                     {
-                                        sourceColumnOffset: getColumnForField('productCode').index,
+                                        sourceColumnOffset: getColumnForField('Accession').index,
                                         showTotals: false,
                                         sortOrder: 'ASCENDING'
                                     }
