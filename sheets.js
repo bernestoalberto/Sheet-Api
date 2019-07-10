@@ -54,7 +54,7 @@ SheetsHelper.prototype.createSpreadsheet = function(title, callback) {
                     properties: {
                         title: 'Data',
                         gridProperties: {
-                            columnCount: 9,
+                            columnCount: 8,
                             frozenRowCount: 1
                         }
                     }
@@ -298,19 +298,19 @@ function buildPivotTableRequest(sourceSheetId, targetSheetId) {
                                         sortOrder: 'ASCENDING'
                                     }
                                 ],
-                                values: [
-                                    {
-                                        summarizeFunction: 'SUM',
-                                        sourceColumnOffset: getColumnForField('unitsOrdered').index
-                                    },
-                                    {
-                                        summarizeFunction: 'SUM',
-                                        name: 'Revenue',
-                                        formula: util.format("='%s' * '%s'",
-                                            getColumnForField('unitsOrdered').header,
-                                            getColumnForField('unitPrice').header)
-                                    }
-                                ]
+                                // values: [
+                                //     {
+                                //         summarizeFunction: 'SUM',
+                                //         sourceColumnOffset: getColumnForField('unitsOrdered').index
+                                //     },
+                                //     {
+                                //         summarizeFunction: 'SUM',
+                                //         name: 'Revenue',
+                                //         formula: util.format("='%s' * '%s'",
+                                //             getColumnForField('unitsOrdered').header,
+                                //             getColumnForField('unitPrice').header)
+                                //     }
+                                // ]
                             }
                         }
                     ]
@@ -332,7 +332,7 @@ function buildFormatPivotTableRequest(sheetId) {
             range: { sheetId: sheetId, startRowIndex: 1, startColumnIndex: 2 },
             cell: {
                 userEnteredFormat: {
-                    numberFormat: { type: 'CURRENCY', pattern: '"$"#,##0.00' }
+                    numberFormat: { type: 'Weight', pattern: '##0.00' }
                 }
             },
             fields: 'userEnteredFormat.numberFormat'

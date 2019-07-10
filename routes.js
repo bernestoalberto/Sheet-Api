@@ -214,7 +214,7 @@ function getClientId(order) {
             resolve(1280);
         }
         else {
-            let query = `Select idclients from clients where  clientname like '%${order['client']}%' limit 1`;
+            let query = `Select id from clients where  business_name like '%${order['client']}%' limit 1`;
             mysql2.exec(query, null, function (response) {
                 (response.length > 0) ?
                     resolve(response[0]['idclients']) :
@@ -347,7 +347,7 @@ function getSpecimenTypeId(order) {
 
 }
 function existOnDB(accession) {
-    let query =   `Select * from orders where  idorders = '${accession}'`;
+    let query =   `Select * from orders where  id = '${accession}'`;
     return new Promise(resolve =>{
         mysql2.exec(query,null,function (response) {
             resolve(response);
@@ -369,9 +369,9 @@ function stringToDate(_date,_format,_delimiter) {
 }
 function createResultEntry(orderid,panelid,specimentype){
 
-    let query = `INSERT INTO results(orderid, testid, testname, panelid, unit) SELECT '${orderid}', c.compoundid, t.name, t.testpanelid, t.unit
-    FROM testcompoundrel c LEFT JOIN tests t ON t.idtests = c.compoundid
-    WHERE t.testpanelid = '${panelid}' AND t.specimentypeid = '${specimentype}'
+    let query = `INSERT INTO results(order_id, test_id) SELECT '${orderid}', c.compoundid, t.name, t.panel_id, t.unit_id
+    FROM testcompoundrel c LEFT JOIN tests t ON t.id = c.compoundid
+    WHERE t.id = '${panelid}' AND t.specimen_id = '${specimentype}'
     AND active= 'yes' GROUP BY c.compoundid ORDER BY compoundid`;
     return new Promise(resolve =>{
         mysql2.exec(query,null,function (response) {
@@ -381,7 +381,7 @@ function createResultEntry(orderid,panelid,specimentype){
 }
 function createEthanolResultEntry(orderid){
 
-    let query = `INSERT INTO results('orderid', 'testid', 'testname', 'unit') VALUES(${orderid},3558,'Ethanol',14)`;
+    let query = `INSERT INTO results('order_id', 'test_id') VALUES(${orderid},3558)`;
     return new Promise(resolve =>{
         mysql2.exec(query,null,function (response) {
             resolve(response);
@@ -399,7 +399,7 @@ function createOrderonDB(order,clientid, specimenid) {
             let source = (order['extractedfrom'] == "N/A") ? " " :order['extractedfrom'];
             let description = (order['description'] == "N/A") ? " " :order['description'];
             let query = `INSERT IGNORE INTO orders
-        (idorders,batchno,description ,clientId,specimentype,orderdate,collectiondate ,receptiondate,source,status,receiver)
+        (id,batch,description ,client_id,specimen_id,order_date,collection_date ,reception_date,source,status,receiver_id)
          VALUES('${order['order']}','${batch}','${description}','${clientid}','${specimenid}',
                 '${date}','${date}','${date}','${source}','${order['orderstatus']}','${order['collector']}')`;
 
@@ -420,6 +420,7 @@ function createOrderonDB(order,clientid, specimenid) {
         }
     });
 }
+
 // TODO: Show spreadsheets on the main page.
 router.get('/', function(req, res, next) {
     let options = {
@@ -555,7 +556,6 @@ router.post('/spreadsheets/:id/sync', function(req, res, next) {
         });
     });
 });
-
 router.get('/import', async function(req, res, next) {
     importOrders(function (dat) {
         console.log(dat);
