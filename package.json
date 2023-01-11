@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.3.0",
-    "body-parser": "~1.13.2",
+    "body-parser": "~1.20.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "google-auth-library": "^0.9.10",
